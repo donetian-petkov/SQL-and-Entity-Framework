@@ -1,0 +1,13 @@
+CREATE FUNCTION dbo.udf_ClientWithCigars
+  ( @firstName VARCHAR(50) )
+RETURNS INT
+AS
+BEGIN
+    RETURN 
+	(
+	SELECT COUNT(cc.CigarId) AS Output FROM Clients as c
+    JOIN ClientsCigars as cc
+    ON c.Id = cc.ClientId
+    WHERE c.FirstName = @firstName
+	)
+END
